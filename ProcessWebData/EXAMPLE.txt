@@ -1,0 +1,81 @@
+INPUT:
+--------------------------------------------
+COMP 1010  Introductory Computer Science 1  3 cr  
+(Lab Required) An introduction to computer programming using a procedural high level language. May not be held with COMP 1011 or COMP 1012 or COMP 1013.
+
+PR/CR: A minimum grade of C is required unless otherwise indicated.
+Prerequisite: any grade 12 or 40S Mathematics, or equivalent.
+
+Equiv To: COMP 1011
+
+Mutually Exclusive: COMP 1012, COMP 1013
+
+Attributes: Science, Recommended Intro Courses
+
+COMP 1010  Introductory Computer Science 1  3 cr  
+(Lab Required) An introduction to computer programming using a procedural high level language. May not be held with COMP 1011 or COMP 1012 or COMP 1013.
+
+PR/CR: A minimum grade of C is required unless otherwise indicated.
+Prerequisite: any grade 12 or 40S Mathematics, or equivalent.
+
+Equiv To: COMP 1011
+
+Mutually Exclusive: COMP 1012, COMP 1013
+
+Attributes: Science, Recommended Intro Courses
+--------------------------------------------
+
+
+OUTPUT:
+{
+"Tag":"COMP 1010", 
+"Description":" An introduction to computer programming using a procedural high level language. May not be held with COMP 1011 or COMP 1012 or COMP 1013.",
+"PREREQS":"..."
+},
+{
+"Tag":"COMP 1010", 
+"Description":" An introduction to computer programming using a procedural high level language. May not be held with COMP 1011 or COMP 1012 or COMP 1013.",
+"PREREQS":"COMP 1010", "COMP 1011", "COMP 1012"...
+},
+
+
+
+Class Course{
+	String[] preReqs;
+	...
+
+	Public Course(String [])
+	{
+		//Convert unformmated string to object instance variables
+		//First 2 words = Tag;
+		//Resest of line = name
+		//If no prereqs, do nothing, else
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
