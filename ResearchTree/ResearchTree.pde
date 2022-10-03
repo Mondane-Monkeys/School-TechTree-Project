@@ -1,11 +1,5 @@
-import javax.swing.JOptionPane; //<>//
-//String[] tags = {"MATH1240", "MATH1300", "COMP1010", "COMP1020", "COMP2140", "COMP2160", "COMP2080", "COMP2130", "COMP2150", "COMP2160", "COMP2190", "COMP2280", "COMP3010", "COMP3020", "COMP3030", "COMP3040", "COMP3090", "COMP3170", "COMP3190", "COMP3290", "COMP3350", "COMP3370", "COMP3430", "COMP3440", "COMP3490", "COMP3820", "COMP4020", "COMP4050", "COMP4060", "COMP4140", "COMP4180", "COMP4190", "COMP4200", "COMP4300", "COMP4300", "COMP4340", "COMP4350", "COMP4360", "COMP4380", "COMP4420", "COMP4430", "COMP4490", "COMP4510", "COMP4520", "COMP4550", "COMP4560", "COMP4580", "COMP4620", "COMP4690", "COMP4710", "COMP4740", "COMP2980", "COMP3980", "COMP4980", "COMP4990"};
-//String[] XLTags={"MATH1240","MATH1300","COMP1010","COMP1012","COMP1020","COMP1500","COMP1600","COMP2080","COMP2130","COMP2140","COMP2150","COMP2160","COMP2190","COMP2280","COMP2980","COMP3010","COMP3020","COMP3030","COMP3040","COMP3090","COMP3170","COMP3190","COMP3290","COMP3350","COMP3370","COMP3380","COMP3430","COMP3440","COMP3490","COMP3820","COMP3980","COMP4020","COMP4050","COMP4060","COMP4140","COMP4180","COMP4190","COMP4200","COMP4300","COMP4340","COMP4350","COMP4360","COMP4380","COMP4420","COMP4430","COMP4490","COMP4510","COMP4520","COMP4550","COMP4560","COMP4580","COMP4620","COMP4690","COMP4710","COMP4740","COMP4980","COMP4990"};
-//String[] names = {"Introductory Computer Science 1","Introductory Computer Science 2"};
-//String[][] preReqs = {{},{},{},{"COMP1010"}};
-//int[][] parents = {};
-//int[] x;
-//int[] y;
+//-----------------------------------------
+import javax.swing.JOptionPane; //<>// //<>//
 
 
 
@@ -56,25 +50,35 @@ void setup() {
 }
 
 void draw() {
-  background(100);
-  for (int i=0; i < courses.length; i++) {
+  background(100); //Clear frame
+  
+  for (int i=0; i < courses.length; i++) { //DrawNodes
     courses[i].drawNode();
   }
-  updateActive();
-  if (highlighting) {
+  
+  updateActive(); //Set mousePos variable
+  
+  if (highlighting) { //Update highlighting
     fill(100, 100, 100, 50);
     rect(mousePos[0], mousePos[1], mouseX-mousePos[0], mouseY-mousePos[1]);
   }
-  mousePos[4]=mousePos[2];
+  
+  mousePos[4]=mousePos[2]; //Change mouse positions
   mousePos[5]=mousePos[3];
   mousePos[2]=mouseX;
   mousePos[3]=mouseY;
-  for (int i=0; i < courses.length; i++) {
+  
+  for (int i=0; i < courses.length; i++) { //Move multiSelect
     if (multiSelect[i]&&mousePressed&&mouseButton==LEFT) {
       println("multSelectMoveQuaant: " + (i));
       courses[i].x += mousePos[2]-mousePos[4];
       courses[i].y += mousePos[3]-mousePos[5];
     }
+  }
+  
+  //Draw DescriptionBox
+  for (int i = 0; i < courses.length; ++i) {
+    courses[i].showDescriptiom(mouseX, mouseY);
   }
 }
 
@@ -186,9 +190,12 @@ class DataNode {
   String tag;//course ID like COMP1010
   String name; //course name like introducory computer Science
   String[] preReqs; //list of course prerequists by tag
+  String description = "This is the default description, and is simply used as a placeholder for a more specific description. It does not matter what is here, only that it is sufficiently long for testing purposes. That includes The spaces and the punctuation. Honestly, I could just add jibberish to this and it would be fine. So instead I thought I would leave a little note here for whoever reads this lol. Frankly I think this is long enough, but who knows? Maybe it should be longer. Some of those courses might have a long description.";
   int[] parentIDs;
   int x = 100;
   int y = 100;
+  int dnWidth = 100;
+  int dnHeight = 100;
   color colour = color(0, 255, 255);
   color colour2 = color (random(150), random(150), random(150));
 
@@ -199,6 +206,8 @@ class DataNode {
     this.preReqs=preReqs;
     this.x = 0;
     this.y = 0;
+    this.dnWidth = 100;
+    this.dnHeight = 100;
     //this.x = 110*(test%9);
     //this.y = 110*(test/9);
   }
@@ -251,4 +260,65 @@ class DataNode {
     float xPos = x + w/2 - tWidth/2;
     text(s, xPos, yPos);
   }
+  
+  void showDescriptiom(int inMouseX, int inMouseY){
+    if (isIn(inMouseX, inMouseY)){
+      drawDesc(inMouseX, inMouseY);
+    }
+  }
+  
+  boolean isIn(int inMouseX, int inMouseY){
+    if (inMouseX>x && inMouseX<(x+dnWidth) && inMouseY>y && inMouseY<(y+dnHeight)) {
+      return true;
+    }
+    return false;
+  }
+  
+  void drawDesc(int inMouseX, int inMouseY) {
+    
+    int headerHeight = 20;
+    int hTextSize = 16;
+    int hMargin = 2;
+    int lineBreak = hTextSize+2*hMargin;
+    int maxDescLines = 4;
+    
+    int minDescriptionWidth = (int)textWidth(description)/maxDescLines;
+    
+    int descWidth = Math.max(minDescriptionWidth, Math.max(200, (int)textWidth(name)));
+    int NumLineCount = (1+(int)textWidth(description)/descWidth)+(6);//'6' is used to get it to work lol. It accounts for blank space and the title,
+    
+    int descHeight = Math.max(200, NumLineCount*(hTextSize+2*hMargin));
+    
+    println(width,descWidth);
+    
+    inMouseX = Math.min(inMouseX, width-descWidth);//prevent overflow
+    inMouseX = Math.max(inMouseX, 0);//prevent underflow
+    inMouseY = Math.min(inMouseY, height-descHeight);//prevent overflow
+    inMouseY = Math.max(inMouseY, 0);//prevent underflow
+    
+    //Main box
+    fill(203, 180, 126);
+    stroke(0);
+    rect(inMouseX, inMouseY, descWidth, descHeight);
+    
+    //header
+    fill(204, 131, 35);
+    noStroke();
+    rect(inMouseX, inMouseY, descWidth, headerHeight);
+    
+    //put text inside header.
+    textSize(hTextSize);
+    fill(0);
+    text(tag+" - " +name, inMouseX+hMargin, inMouseY+hTextSize+hMargin);
+    
+    //put text inside Description
+    int line = 2;
+    String Pre = "";
+    for(int i = 0; i<preReqs.length; ++i){
+      Pre += preReqs[i]+" ";
+    }
+    text(description+"\n\n"+Pre, inMouseX+hMargin, inMouseY+hTextSize*line+hMargin*line, descWidth, descHeight);
+  }
+  
+  
 }
