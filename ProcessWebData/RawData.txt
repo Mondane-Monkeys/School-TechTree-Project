@@ -26,7 +26,7 @@ COMP 1020  Introductory Computer Science 2  3 cr
 (Lab Required) More features of a procedural language, elements of programming. May not be held with COMP 1021.
 
 PR/CR: A minimum grade of C is required unless otherwise indicated.
-Prerequisite: COMP 1010 or COMP 1011; or COMP 1012 or COMP 1013; or High School Computer Science 40S (75%) and any grade 12 or 40S Mathematics, or equivalent.
+Prerequisite: COMP   or COMP 1011; or COMP 1012 or COMP 1013; or High School Computer Science 40S (75%) and any grade 12 or 40S Mathematics, or equivalent.
 
 Equiv To: COMP 1021
 
