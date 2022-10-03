@@ -28,14 +28,14 @@ Attributes: Science, Recommended Intro Courses
 
 OUTPUT:
 {
-"Tag":"COMP 1010", 
-"Description":" An introduction to computer programming using a procedural high level language. May not be held with COMP 1011 or COMP 1012 or COMP 1013.",
-"PREREQS":"..."
+	"Tag":"COMP 1010", 
+	"Description":" An introduction to computer programming using a procedural high level language. May not be held with COMP 1011 or COMP 1012 or COMP 1013.",
+	"PREREQS":"..."
 },
 {
-"Tag":"COMP 1010", 
-"Description":" An introduction to computer programming using a procedural high level language. May not be held with COMP 1011 or COMP 1012 or COMP 1013.",
-"PREREQS":"COMP 1010", "COMP 1011", "COMP 1012"...
+	"Tag":"COMP 1010", 
+	"Description":" An introduction to computer programming using a procedural high level language. May not be held with COMP 1011 or COMP 1012 or COMP 1013.",
+	"PREREQS":"COMP 1010", "COMP 1011", "COMP 1012"...
 },
 
 
