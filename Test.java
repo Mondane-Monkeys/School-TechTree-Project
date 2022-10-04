@@ -30,8 +30,6 @@ public class Test
 
         assert compCourse != null;
 
-        System.out.println(!Character.isUpperCase('['));
-
         for (int i = 0; i < myCourses.size(); i++)
         {
             System.out.println(myCourses.get(i));
