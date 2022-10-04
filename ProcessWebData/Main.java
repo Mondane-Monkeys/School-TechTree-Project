@@ -1,17 +1,16 @@
-package ProcessWebData;
 import java.io.*;
 import java.util.*;
 
 public class Main
 {
-    public static ArrayList<ProcessWebData> myCourses = new ArrayList<>();
+    public static ArrayList<Course> myCourses = new ArrayList<>();
 
     public static void main(String[] args) throws FileNotFoundException
     {
         String newLine;
         String[] tokens;
 
-        ProcessWebData compCourse = null;
+        Course compCourse = null;
 
         Scanner fileReader = new Scanner(new File("test.txt"));
         while (fileReader.hasNextLine())
@@ -21,7 +20,7 @@ public class Main
 
             if (tokens[0].equals("COMP"))
             {
-                compCourse = new ProcessWebData();
+                compCourse = new Course();
                 myCourses.add(compCourse);
             }
 
@@ -31,6 +30,11 @@ public class Main
 
         assert compCourse != null;
 
-        System.out.println(myCourses.size());
+        System.out.println(!Character.isUpperCase('['));
+
+        for (int i = 0; i < myCourses.size(); i++)
+        {
+            System.out.println(myCourses.get(i));
+        }
     }
 }
