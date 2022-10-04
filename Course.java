@@ -1,4 +1,4 @@
-public class ProcessWebData
+public class Course
 {
 
     // ................................................
@@ -39,7 +39,7 @@ public class ProcessWebData
      * Course Constructor
      * .....................................
      */
-    public ProcessWebData()
+    public Course()
     {
         // ..................................
         // initialzations
