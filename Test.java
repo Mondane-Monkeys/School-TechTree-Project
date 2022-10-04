@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class Test
+public class Test   
 {
     public static ArrayList<Course> myCourses = new ArrayList<>();
 

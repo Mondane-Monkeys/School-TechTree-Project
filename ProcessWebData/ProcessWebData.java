@@ -21,9 +21,7 @@ public class ProcessWebData {
     String courseCode;
     String description;
     String prCr;
-
-    String[] attributes;
-    int attributeIndex;
+    String attributes;
 
     String[] equivCourse;
     int equivCourseIndex;
@@ -52,10 +50,10 @@ public class ProcessWebData {
         courseCode = "";
         description = "";
         prCr = "";
+        attributes = "";
 
         mutallyExclusiveIndex = 0;
         equivCourseIndex = 0;
-        attributeIndex = 0;
         preReqIndex = 0;
         coReqIndex = 0;
         // ...........................................
@@ -124,10 +122,9 @@ public class ProcessWebData {
             }
 
         } else if (tokens[0].equals(ATTRIBUTES)) {
-            attributes = new String[tokens.length];
 
             for (int i = 1; i < tokens.length; i++) {
-                attributes[attributeIndex++] = tokens[i];
+                attributes += tokens[i] + ((i < tokens.length - 1) ? " " : "");
             }
 
         } else if (tokens[0].equals(PR_CR)) {
@@ -166,12 +163,11 @@ public class ProcessWebData {
             description = tempString.toString().trim();
         }
 
-        // Trim out all the extra '.' and ',' characters from the arrays.
+        // Trim out all the extra non alphabetic characters from the prop arrays.
         trimAttributes(preReqs, preReqIndex);
         trimAttributes(coReqs, coReqIndex);
         trimAttributes(equivCourse, equivCourseIndex);
         trimAttributes(mutuallyExclusive, mutallyExclusiveIndex);
-        trimAttributes(attributes, attributeIndex);
     }// ....................................End ProcessData
 
     public boolean isUpperCase(String s) {
@@ -221,13 +217,18 @@ public class ProcessWebData {
                 "Name: " + name + "\n" +
                 "Description: " + description + "\n" +
                 (prCr.length() > 0 ? ("PR/CR: " + prCr + "\n") : "") +
-                (preReqIndex > 1 ? "Prerequisite: " + propToString(preReqs, preReqIndex) + "\n" : "") +
-                (coReqIndex > 1 ? "Co-requisite: " + propToString(coReqs, coReqIndex) + "\n" : "") +
-                (equivCourseIndex > 1 ? "Equiv To: " + propToString(equivCourse, equivCourseIndex) + "\n" : "") +
+                (preReqIndex > 1
+                        ? "Prerequisite" + (preReqIndex >= 2 ? "s: " : ": ") + propToString(preReqs, preReqIndex) + "\n"
+                        : "")
+                +
+                (coReqIndex > 1
+                        ? "Co:requisite" + (coReqIndex >= 2 ? "s: " : ": ") + propToString(coReqs, coReqIndex) + "\n"
+                        : "")
+                + (equivCourseIndex > 1 ? "Equiv To: " + propToString(equivCourse, equivCourseIndex) + "\n" : "") +
                 (mutallyExclusiveIndex > 1 ? "Mutually Exclusive: " + propToString(mutuallyExclusive,
                         mutallyExclusiveIndex) + "\n" : "")
                 +
-                (attributeIndex > 1 ? "Attributes: " + propToString(attributes, attributeIndex) + "\n" : "") +
+                "Attributes: " + attributes + "\n" +
                 "}\n";
 
         return output;
@@ -240,6 +241,7 @@ public class ProcessWebData {
         StringBuilder tempString = new StringBuilder();
 
         for (int i = 0; i < propLength; i++) {
+
             if (numTokens > MAX_NUM_TOKENS) {
                 tempString.append("\n");
                 numTokens = 0;
