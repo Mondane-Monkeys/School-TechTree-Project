@@ -1,8 +1,8 @@
+package ProcessWebData;
 import java.util.ArrayList;
 
-public class Course
-{
-    public static ArrayList<Course> courseList = new ArrayList<>();
+public class ProcessWebData {
+    public static ArrayList<ProcessWebData> courseList = new ArrayList<>();
 
     // ................................................
     // Keywords for data procecssing
@@ -46,8 +46,7 @@ public class Course
      * .....................................
      */
 
-    public Course()
-    {
+    public ProcessWebData() {
         // ..................................
         // initialzations
         name = "";
@@ -65,48 +64,37 @@ public class Course
         courseList.add(this);
     }
 
-    public void processData(String[] tokens)
-    {
-        if (tokens[0].equals(COURSE_CODE))
-        {
+    public void processData(String[] tokens) {
+        if (tokens[0].equals(COURSE_CODE)) {
             courseCode = tokens[0] + " " + tokens[1];
 
-            for (int i = 2; i < tokens.length; i++)
-            {
+            for (int i = 2; i < tokens.length; i++) {
                 name += tokens[i] + ((i < tokens.length - 1) ? " " : "");
             }
 
-        } else if (tokens[0].equals(PRE_REQ) || tokens[0].equals(PRE_REQS))
-        {
+        } else if (tokens[0].equals(PRE_REQ) || tokens[0].equals(PRE_REQS)) {
             int coReqStart = tokens.length;// The token that started corequisites
 
             preReqs = new String[tokens.length];
 
-            for (int i = 1; i < tokens.length; i++)
-            {
-                if (isUpperCase(tokens[i]))
-                {
+            for (int i = 1; i < tokens.length; i++) {
+                if (isUpperCase(tokens[i])) {
                     preReqs[preReqIndex++] = tokens[i] + " " + tokens[i + 1];
-                } else if (tokens[i].equals(CO_REQUISITES))
-                {
+                } else if (tokens[i].equals(CO_REQUISITES)) {
                     coReqStart = i;
 
                     coReqs = new String[tokens.length];
 
-                    for (int j = i + 1; j < tokens.length; j++)
-                    {
-                        if (isUpperCase(tokens[j]))
-                        {
+                    for (int j = i + 1; j < tokens.length; j++) {
+                        if (isUpperCase(tokens[j])) {
                             coReqs[coReqIndex++] = tokens[j] + " " + tokens[j + 1];
                         }
                     }
 
-                    if (coReqIndex == 0)
-                    {
+                    if (coReqIndex == 0) {
                         StringBuilder tempString = new StringBuilder();
 
-                        for (int j = 1; j < tokens.length; j++)
-                        {
+                        for (int j = 1; j < tokens.length; j++) {
                             tempString.append(tokens[i]).append(" ");
                         }
 
@@ -116,68 +104,55 @@ public class Course
                 }
             }
 
-            if (preReqIndex == 0)
-            {
+            if (preReqIndex == 0) {
                 StringBuilder tempString = new StringBuilder();
 
-                for (int i = 1; i < coReqStart; i++)
-                {
+                for (int i = 1; i < coReqStart; i++) {
                     tempString.append(tokens[i]).append(" ");
                 }
 
                 preReqs[preReqIndex++] = tempString.toString();
             }
 
-        } else if (tokens[0].equals(EQUIV_COURSE))
-        {
+        } else if (tokens[0].equals(EQUIV_COURSE)) {
             equivCourse = new String[tokens.length];
 
-            for (int i = 2; i < tokens.length; i++)
-            {
+            for (int i = 2; i < tokens.length; i++) {
 
-                if (isUpperCase(tokens[i]))
-                {
+                if (isUpperCase(tokens[i])) {
                     equivCourse[equivCourseIndex++] = tokens[i] + " " + tokens[i + 1];
                 }
             }
 
-        } else if (tokens[0].equals(ATTRIBUTES))
-        {
+        } else if (tokens[0].equals(ATTRIBUTES)) {
             attributes = new String[tokens.length];
 
-            for (int i = 1; i < tokens.length; i++)
-            {
+            for (int i = 1; i < tokens.length; i++) {
                 attributes[attributeIndex++] = tokens[i];
             }
 
-        } else if (tokens[0].equals(PR_CR))
-        {
+        } else if (tokens[0].equals(PR_CR)) {
             StringBuilder tempString = new StringBuilder();
 
-            for (int i = 1; i < tokens.length; i++)
-            {
+            for (int i = 1; i < tokens.length; i++) {
                 tempString.append(tokens[i]).append(" ");
             }
 
             prCr = tempString.toString();
-        } else if (tokens[0].equals(MUTUALLY_EXCLUSIVE))
-        {
+        } else if (tokens[0].equals(MUTUALLY_EXCLUSIVE)) {
             mutuallyExclusive = new String[tokens.length];
 
-            for (int i = 2; i < tokens.length; i++)
-            {
+            for (int i = 2; i < tokens.length; i++) {
 
-                if (isUpperCase(tokens[i]))
-                {
+                if (isUpperCase(tokens[i])) {
                     mutuallyExclusive[mutallyExclusiveIndex++] = tokens[i] + " " + tokens[i + 1];
                 }
             }
-        } else
-        {
+        } else {
 
         }
 
-        //Trim out all the extra '.' and ',' characters from the arrays.
+        // Trim out all the extra '.' and ',' characters from the arrays.
         trimAttributes(preReqs, preReqIndex);
         trimAttributes(coReqs, coReqIndex);
         trimAttributes(equivCourse, equivCourseIndex);
@@ -185,37 +160,28 @@ public class Course
         trimAttributes(attributes, attributeIndex);
     }
 
-    public boolean isUpperCase(String s)
-    {
-        for (int i = 0; i < s.length(); i++)
-        {
-            if (!Character.isLetter(s.charAt(i)))
-            {
+    public boolean isUpperCase(String s) {
+        for (int i = 0; i < s.length(); i++) {
+            if (!Character.isLetter(s.charAt(i))) {
                 return false;
-            } else if (Character.isLowerCase(s.charAt(i)))
-            {
+            } else if (Character.isLowerCase(s.charAt(i))) {
                 return false;
             }
         }
         return true;
     }
 
-    public void trimAttributes(String[] prop, int propLength)
-    {
-        for (int i = 0; i < propLength; i++)
-        {
-            if (prop[i].contains(","))
-            {
+    public void trimAttributes(String[] prop, int propLength) {
+        for (int i = 0; i < propLength; i++) {
+            if (prop[i].contains(",")) {
                 prop[i] = prop[i].replace(",", "");
-            } else if (prop[i].contains("."))
-            {
+            } else if (prop[i].contains(".")) {
                 prop[i] = prop[i].replace(".", "");
             }
         }
     }
 
-    public String toString()
-    {
+    public String toString() {
         String output = "{" + "\n" +
 
                 "Course Code: " + courseCode + "\n" +
@@ -225,19 +191,18 @@ public class Course
                 (coReqIndex > 1 ? (propToString(preReqs, preReqIndex).length() + "\n") : "") +
                 (equivCourseIndex > 1 ? (propToString(equivCourse, equivCourseIndex).length() + "\n") : "") +
                 (mutallyExclusiveIndex > 1 ? (propToString(mutuallyExclusive, mutallyExclusiveIndex).length() +
-                        "\n") : "") +
+                        "\n") : "")
+                +
                 (attributeIndex > 1 ? (propToString(attributes, attributeIndex).length() + "\n") : "") +
                 "}\n";
 
         return output;
     }
 
-    public String propToString(String[] prop, int propLength)
-    {
+    public String propToString(String[] prop, int propLength) {
         StringBuilder tempString = new StringBuilder();
 
-        for (int i = 0; i < propLength; i++)
-        {
+        for (int i = 0; i < propLength; i++) {
             tempString.append(prop[i]).append(", ");
         }
 
