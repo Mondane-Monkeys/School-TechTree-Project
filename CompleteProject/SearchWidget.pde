@@ -30,7 +30,7 @@ private DataNode[] searchResults(String filter) {
     
     //filtered list
     for (DataNode course : courseTiles) {
-        if (course.tags.contains(filter) || course.name.contains(filter)) {
+        if (course.tag.contains(filter) || course.name.contains(filter)) {
             returnList.add(course);
         }
     }
