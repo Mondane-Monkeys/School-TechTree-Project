@@ -35,6 +35,7 @@ class DataNode {
     this.y = 0;
     this.dnWidth = 100;
     this.dnHeight = 100;
+    
   }
 
   //find parents ID from tag
@@ -69,7 +70,7 @@ class DataNode {
     placeText(name, x, y+22, 98, 75);//Title
 
     //Lines
-    for (int i=0; i < parentIDs.length; i++) {
+    for (int i=0; (i < parentIDs.length); i++) {
       line(x+50, y, courseTiles[parentIDs[i]].x+50, courseTiles[parentIDs[i]].y+100);
     }
   }
