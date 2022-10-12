@@ -29,7 +29,8 @@ class DataNode {
     this.ID = id;
     this.tag=course.courseCode;
     this.name=course.name;
-    this.preReqs=preReqs; //TODO add coReqs
+    this.preReqs= course.preReqs; 
+    this.coReqs = course.coReqs;//TODO add coReqs
     this.x = 0;
     this.y = 0;
     this.dnWidth = 100;
