@@ -29,11 +29,12 @@ class DataNode {
     this.ID = id;
     this.tag=course.courseCode;
     this.name=course.name;
-    this.preReqs=preReqs; //TODO add coReqs
+    this.preReqs=(course.preReqs==null)?new String[0]:course.preReqs; //TODO add coReqs
     this.x = 0;
     this.y = 0;
     this.dnWidth = 100;
     this.dnHeight = 100;
+    
   }
 
   //find parents ID from tag
@@ -68,7 +69,7 @@ class DataNode {
     placeText(name, x, y+22, 98, 75);//Title
 
     //Lines
-    for (int i=0; i < parentIDs.length; i++) {
+    for (int i=0; (i < parentIDs.length); i++) {
       line(x+50, y, courseTiles[parentIDs[i]].x+50, courseTiles[parentIDs[i]].y+100);
     }
   }

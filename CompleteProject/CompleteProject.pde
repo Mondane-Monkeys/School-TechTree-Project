@@ -36,13 +36,13 @@ void draw() {
   mousePos[2]=mouseX;
   mousePos[3]=mouseY;
 
-  for (int i=0; i < courseTiles.length; i++) { //Move multiSelect
-    if (multiSelect[i]&&mousePressed&&mouseButton==LEFT) {
-      println("multSelectMoveQuaant: " + (i));
-      courseTiles[i].x += mousePos[2]-mousePos[4];
-      courseTiles[i].y += mousePos[3]-mousePos[5];
-    }
-  }
+  // for (int i=0; i < courseTiles.length; i++) { //Move multiSelect
+  //   if (multiSelect[i]&&mousePressed&&mouseButton==LEFT) {
+  //     println("CompleteProject.draw: " + (i));
+  //     courseTiles[i].x += mousePos[2]-mousePos[4];
+  //     courseTiles[i].y += mousePos[3]-mousePos[5];
+  //   }
+  // }
 
   //Draw DescriptionBox
   for (int i = 0; i < courseTiles.length; ++i) {
@@ -53,18 +53,38 @@ void draw() {
 //Initializer
 void initcourseTiles() {
   ArrayList<Course> courses = new ArrayList<Course>();
-  try {
-    Main.main(new String[0]);
-    courses = ProcessWebData.parseFile("RawData.txt");
-  } catch (Exception e) {
-    println("Bam "+ e);
+  String[] lines = loadStrings("RawData.txt");
+  
+  //parse Data
+  String newLine;
+  String[] tokens;
+  Course compCourse = null;
+  for (int i = 0; i < lines.length; ++i) {
+    {
+      newLine = lines[i];
+      tokens = newLine.trim().split("\\s+");
+
+      if (tokens[0].equals("COMP"))
+      {
+          compCourse = new Course();
+          courses.add(compCourse);
+      }
+
+      if (compCourse != null)
+          compCourse.processData(tokens);
+    }
   }
+  
+  //create DataNodes
   courseTiles = new DataNode[courses.size()];
   int i=0;
   for (Course course : courses) {
     courseTiles[i++]=(new DataNode(course, i));
   }
-  println(courseTiles.length);
+  for (i = 0; i < courseTiles.length; ++i) {
+    courseTiles[i].getParents();
+  }
+  println("CompleteProject.initcourseTiles: "+courseTiles.length);
 }
 
 //mouseClick/released
@@ -96,7 +116,7 @@ void mouseReleased() {
   active = -1;
   if (highlighting) {
     highlighting = false;
-    println(mousePos[0]);
+    println("CompleteProject.mouseReleased: "+mousePos[0]);
     makeBox(mousePos[0], mousePos[1]);
   }
 }
@@ -116,7 +136,7 @@ void keyPressed() {
       exportString += ",";
     }
     exportString += "|";
-    println(exportString);
+    println("CompleteProject.keyPressed: "+exportString);
   }
   if (key ==  'o') {
     String impString = JOptionPane.showInputDialog("importString");
