@@ -4,13 +4,13 @@ public void draw(float x, float y, float width, float height) {
     
     //if (filter!= null) {
     //    subCourseTiles = searchResults;
-    //}
+//}
     
-     //Example
-     fill(80,160,200);
-     rect(x, y, width, height);
+    //Example
+    fill(80,160,200);
+    rect(x, y, width, height);
     
-     int cols = 3;
+    int cols = 3;
     
     float tileWidth = width / cols; //calculate tile size
     float tileHeight = tileWidth;
@@ -25,7 +25,7 @@ public void draw(float x, float y, float width, float height) {
 }
 
 
-private DataNode[] searchResults(String filter) {
+private ArrayList<DataNode> searchResults(String filter) {
     ArrayList<DataNode> returnList = new ArrayList<DataNode>();
     
     //filtered list
