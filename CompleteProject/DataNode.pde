@@ -3,6 +3,7 @@ class DataNode {
   String tag;//course ID like COMP1010
   String name; //course name like introducory computer Science
   String[] preReqs; //list of course prerequists by tag
+  String[] coReqs;
   String description = "This is the default desccourseTilesription, and is simply used as a placeholder for a more specific description. It does not matter what is here, only that it is sufficiently long for testing purposes. That includes The spaces and the punctuation. Honestly, I could just add jibberish to this and it would be fine. So instead I thought I would leave a little note here for whoever reads this lol. Frankly I think this is long enough, but who knows? Maybe it should be longer. Some of those courseTiles might have a long description.";
   int[] parentIDs;
   int x = 100;
