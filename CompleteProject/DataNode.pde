@@ -30,20 +30,40 @@ class DataNode {
     this.ID = id;
     this.tag=course.courseCode;
     this.name=course.name;
-    this.preReqs= course.preReqs; 
-    this.coReqs = course.coReqs;//TODO add coReqs
+    this.preReqs= (course.preReqs==null)? new String[0] : course.preReqs; 
+    this.coReqs = (course.coReqs==null)? new String[0] : course.coReqs;//TODO add coReqs
     this.x = 0;
     this.y = 0;
     this.dnWidth = 100;
     this.dnHeight = 100;
+    trimPreReqs();
+  }
+  
+  void trimPreReqs(){
+    //count prereqs
+    int preReqCount = 0;
+    for (preReqCount = 0; preReqCount < preReqs.length && preReqs[preReqCount]!=null; ++preReqCount) {
+      //Do nothing lol
+    }
     
+    String[] newReqs = new String[preReqCount];
+    
+    for (int i = 0; i < newReqs.length; ++i) {
+      newReqs[i]=preReqs[i];
+    }
+    
+    preReqs = newReqs;
   }
 
   //find parents ID from tag
   void getParents() {
     parentIDs = new int[preReqs.length];
+    for (int i = 0; i < parentIDs.length; ++i) {
+      parentIDs[i] =-1;
+    }
     int counter =0;
-    for (int j=0; j < courseTiles.length; j++) {
+    int j; //itorator -> used to mark unfound preReqs as -1;
+    for (j=0; j < courseTiles.length; j++) {
       if (isParent(courseTiles[j])) {
         parentIDs[counter++] = j;
       }
@@ -53,7 +73,7 @@ class DataNode {
   boolean isParent(DataNode dn) {
     boolean returnVal = false;
     String parentTag = dn.tag;
-    for (int i=0; i < preReqs.length; i++) {
+    for (int i=0; i < preReqs.length && preReqs[i]!=null; i++) {
       if (parentTag.equals(preReqs[i])) {
         returnVal=true;
       }
@@ -72,7 +92,9 @@ class DataNode {
 
     //Lines
     for (int i=0; (i < parentIDs.length); i++) {
-      line(x+50, y, courseTiles[parentIDs[i]].x+50, courseTiles[parentIDs[i]].y+100);
+      if (parentIDs[i]>=0) {
+        line(x+50, y, courseTiles[parentIDs[i]].x+50, courseTiles[parentIDs[i]].y+100);
+      }
     }
   }
   
@@ -114,10 +136,7 @@ class DataNode {
   }
 
   boolean isIn(int inMouseX, int inMouseY) {
-    if (inMouseX>x && inMouseX<(x+dnWidth) && inMouseY>y && inMouseY<(y+dnHeight)) {
-      return true;
-    }
-    return false;
+    return inMouseX>x && inMouseX<(x+dnWidth) && inMouseY>y && inMouseY<(y+dnHeight);
   }
 
   void drawDesc(int inMouseX, int inMouseY) {
@@ -164,5 +183,9 @@ class DataNode {
       Pre += preReqs[i]+" ";
     }
     text(description+"\n\n"+Pre, inMouseX+hMargin, inMouseY+hTextSize*line+hMargin*line, descWidth, descHeight);
+  }
+  
+  public String toString(){
+    return tag;
   }
 }

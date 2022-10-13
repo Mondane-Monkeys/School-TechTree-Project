@@ -1,5 +1,5 @@
-//----------------------------------------- //<>//
-import javax.swing.JOptionPane; //<>//
+//-----------------------------------------
+import javax.swing.JOptionPane;
 
 DataNode[] courseTiles;
 
@@ -15,7 +15,7 @@ void setup() {
 }
 
 void draw() {
-    background(100); //Clear frame //<>//
+    background(100); //Clear frame
     drawGraphWidget(0,0,0,0);
     
     
@@ -50,8 +50,6 @@ void draw() {
     for (int i = 0; i < courseTiles.length; ++i) {
         courseTiles[i].showDescriptiom(mouseX, mouseY);
     }
-    
-    generateGraph();//THIS IS THE PRINTLN LINE
 }
 
 // Initializer
@@ -165,8 +163,6 @@ void keyPressed() {
                 temp += impString.charAt(i);
             }
         }
-    } else if (key == 'm') {
-        badOptimize();
     }
 }
 
