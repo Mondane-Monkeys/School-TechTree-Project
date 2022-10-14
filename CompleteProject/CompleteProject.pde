@@ -10,48 +10,16 @@ int[] mousePos = new int[6];//0-1 highlight box; 2-5 for moving multiselect
 
 void setup() {
     size(2500, 1400);
-    strokeWeight(3);
+    strokeWeight(1);
     initcourseTiles();
 }
 
 void draw() {
     background(100); //Clear frame //<>//
-    drawGraphWidget(0,0,0,0);
+    drawGraphWidget(350,0,2200,1400);
+    drawSearchWidget(0,200,300,1200);
     
-    
-    
-    // for (int i = 0; i < courseTiles.length; i++) { //DrawNodes
-    //     if (courseTiles[i]!= null) {
-    //         courseTiles[i].drawNode();
-    //     }
-    // }
-    
-    // updateActive(); //Set mousePos variable
-    
-    // if (highlighting) { //Update highlighting
-    //     fill(100, 100, 100, 50);
-    //     rect(mousePos[0], mousePos[1], mouseX - mousePos[0], mouseY - mousePos[1]);
-    // }
-    
-    // mousePos[4] = mousePos[2]; //Change mouse positions
-    // mousePos[5] = mousePos[3];
-    // mousePos[2] = mouseX;
-    // mousePos[3] = mouseY;
-    
-    //for (int i=0; i < courseTiles.length; i++) { //Move multiSelect
-    //if (multiSelect[i]&&mousePressed&&mouseButton==LEFT) {
-    //println("CompleteProject.draw: " + (i));
-    //courseTiles[i].x += mousePos[2]-mousePos[4];
-    //courseTiles[i].y += mousePos[3]-mousePos[5];
-    //  }
-// }
-    
-    //Draw DescriptionBox -> move to DataNode.draw();
-    for (int i = 0; i < courseTiles.length; ++i) {
-        courseTiles[i].showDescriptiom(mouseX, mouseY);
-    }
-    
-    generateGraph();//THIS IS THE PRINTLN LINE
+    generateGraph();
 }
 
 // Initializer

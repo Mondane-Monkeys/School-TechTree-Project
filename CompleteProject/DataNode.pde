@@ -91,42 +91,37 @@ class DataNode {
     placeText(name, x, y+22, 98, 75);//Title
 
     //Lines
+    strokeWeight(3);
     for (int i=0; (i < parentIDs.length); i++) {
       if (parentIDs[i]>=0) {
         line(x+50, y, courseTiles[parentIDs[i]].x+50, courseTiles[parentIDs[i]].y+100);
       }
     }
+    strokeWeight(1);
+    
+    if (isIn(mouseX, mouseY)) {
+      drawDesc(mouseX, mouseY);
+    }
   }
   
-  void drawNode(float x,float y,float w,float h) {
-    //TODO actually do this lol;
-    fill(x%255, y%255, x%255);
-    rect(x, y, w, h);
+  void drawNode(float x,float y,float w,float h) { //ignores Node.x,y,w,h, and does not draw parentLines
+    //rect
+    placeText(""+ID, (int)x, (int)y, 0.2*w, 0.2*h);//ID
+    placeText(tag, (int)x+0.22*w, (int)y, 0.78*w, 0.20*h);//Tag
+    placeText(name, (int)x, (int)y+0.22*h, 0.98*w, 0.75*h);//Title
     
-    
-    // //rect
-    // fill(colour);
-    // rect(x, y, 100, 100);
-    // placeText(""+ID, x, y, 20, 20);//ID
-    // placeText(tag, x+22, y, 70, 20);//Tag
-    // placeText(name, x, y+22, 98, 75);//Title
-
-    // //Lines
-    // for (int i=0; i < parentIDs.length; i++) {
-    //   line(x+50, y, courseTiles[parentIDs[i]].x+50, courseTiles[parentIDs[i]].y+100);
-    // }
+    if (isIn(mouseX, mouseY, x,y,w,h)) {
+      drawDesc(mouseX, mouseY);
+    }
   }
-
-  void placeText(String s, int x, int y, int w, int h) {
+  
+  void placeText(String s, float x, float y, float w, float h) {
     fill(colour2);
     rect(x, y, w, h);
     fill(255);
     stroke(255);
-    float tWidth = textWidth(s);
-    float tHeight = textAscent()+textDescent();
-    float yPos = h/2 + tHeight/2 + y;
-    float xPos = x + w/2 - tWidth/2;
-    text(s, xPos, yPos);
+    textSize(Math.min(h*0.7, 15));
+    text(s, x, y+h*0.15, w, h);
   }
 
   void showDescriptiom(int inMouseX, int inMouseY) {
@@ -137,6 +132,10 @@ class DataNode {
 
   boolean isIn(int inMouseX, int inMouseY) {
     return inMouseX>x && inMouseX<(x+dnWidth) && inMouseY>y && inMouseY<(y+dnHeight);
+  }
+  
+  boolean isIn(int inMouseX, int inMouseY, float x,float y,float w,float h) {
+    return inMouseX>x && inMouseX<(x+w) && inMouseY>y && inMouseY<(y+h);
   }
 
   void drawDesc(int inMouseX, int inMouseY) {

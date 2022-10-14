@@ -1,4 +1,16 @@
+float graphX;
+float graphY;
+float graphWidth;
+float graphHeight;
+
+//width must be greater than 150!
 void drawGraphWidget(float x,float y,float width,float height){
+    graphX = x;
+    graphY = y;
+    graphWidth = width;
+    graphHeight = height;
+    fill(120);
+    rect(x, y, width, height);
     for (int i = 0; i < courseTiles.length; i++) { //DrawNodes
         if (courseTiles[i]!= null) {
             courseTiles[i].drawNode();
@@ -23,7 +35,20 @@ void drawGraphWidget(float x,float y,float width,float height){
     // courseTiles[i].x += mousePos[2]-mousePos[4];
     // courseTiles[i].y += mousePos[3]-mousePos[5];
     //  }
-// }
+    // }
+    
+    checkTileBounds();
+    textSize(24);
+    text("Score: "+(double)edgeLength(currentPositionArray()), x+width-400, y+30);
+}
+
+void checkTileBounds(){
+    for (int i = 0; i < courseTiles.length; ++i) {
+        courseTiles[i].x=Math.max((int)graphX, courseTiles[i].x);
+        courseTiles[i].x=Math.min((int)graphX+(int)graphWidth-150, courseTiles[i].x);
+        courseTiles[i].y=Math.max((int)graphY, courseTiles[i].y);
+        courseTiles[i].y=Math.min((int)graphY+(int)graphHeight-150, courseTiles[i].y);
+    }
 }
 
 
@@ -36,7 +61,7 @@ void generateGraph(){
         positions[i][0] = courseTiles[i].x;
         positions[i][1] = courseTiles[i].y;
     }
-    println(edgeLength(positions));
+    // println(edgeLength(positions));
 }
 
 void badOptimize(){
@@ -54,8 +79,6 @@ void badOptimize(){
         while (currentDist<previousDist) {
             previousDist = currentDist;
             courseTiles[i].x+=1;
-            courseTiles[i].x=Math.max(0, courseTiles[i].x);
-            courseTiles[i].x=Math.min(width-150, courseTiles[i].x);
             currentDist = edgeLength(currentPositionArray());
         }
         
@@ -65,8 +88,6 @@ void badOptimize(){
         while (currentDist<previousDist) {
             previousDist = currentDist;
             courseTiles[i].y+=1;
-            courseTiles[i].y=Math.max(0, courseTiles[i].y);
-            courseTiles[i].y=Math.min(height-150, courseTiles[i].y);
             currentDist = edgeLength(currentPositionArray());
         }
         
@@ -76,8 +97,6 @@ void badOptimize(){
         while (currentDist<previousDist) {
             previousDist = currentDist;
             courseTiles[i].x+=1;
-            courseTiles[i].x=Math.max(0, courseTiles[i].x);
-            courseTiles[i].x=Math.min(width-150, courseTiles[i].x);
             currentDist = edgeLength(currentPositionArray());
         }
         
@@ -87,11 +106,12 @@ void badOptimize(){
         while (currentDist<previousDist) {
             previousDist = currentDist;
             courseTiles[i].y+=1;
-            courseTiles[i].y=Math.max(0, courseTiles[i].y);
-            courseTiles[i].y=Math.min(height-150, courseTiles[i].y);
             currentDist = edgeLength(currentPositionArray());
         }
+        courseTiles[i].x+=1;
+        courseTiles[i].y+=1;
     }
+    checkTileBounds();
 }
 
 float[][] currentPositionArray(){
@@ -124,7 +144,7 @@ float edgeLength(float[][] positions){
     for (int i = 1; i < edgeCount; ++i) {
         distances[0]+=distances[i];
     }
-    return distances[0]+1000*overlap(positions);
+    return distances[0]+10000*overlap(positions);
 }
 
 float overlap(float[][] positions){
@@ -132,9 +152,9 @@ float overlap(float[][] positions){
     for (int i = 0; i < positions.length; ++i) {
         for (int j = 0; j < positions.length; ++j) {
             if (i!=j) {
-                float xOverlap = Math.max(0, positions[i][0]-positions[j][0]+130);//calculate the X overlap, 100=width and height of tile, +30 for margins
-                float yOverlap = Math.max(0, positions[i][1]-positions[j][1]+130);
-                if (xOverlap<100 && yOverlap<100) {
+                float xOverlap = Math.max(0, positions[i][0]-positions[j][0]+100);//calculate the X overlap, 100=width and height of tile, +30 for margins
+                float yOverlap = Math.max(0, positions[i][1]-positions[j][1]+100);
+                if (xOverlap<=100 && yOverlap<=100) {
                     totalOverlap += (xOverlap*yOverlap);
                 }
             }
