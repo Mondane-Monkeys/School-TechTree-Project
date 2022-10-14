@@ -57,7 +57,7 @@ void draw() {
 // Initializer
 void initcourseTiles() {
     ArrayList<Course> courses = new ArrayList<Course>();
-    String[]lines = loadStrings("RawData.txt");
+    String[]lines = loadStrings("TestData.txt");
     
     //parse Data
     String newLine;

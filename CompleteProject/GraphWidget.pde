@@ -40,6 +40,12 @@ void generateGraph(){
 }
 
 void badOptimize(){
+    for (int i = 0; i < courseTiles.length; ++i) {
+        courseTiles[i].y = floor(courseTiles[i].y);
+        courseTiles[i].x = floor(courseTiles[i].x);
+    }
+    
+    
     float currentDist = edgeLength(currentPositionArray());
     float previousDist = currentDist;
     for (int i = 0; i < courseTiles.length; ++i) {
@@ -64,7 +70,7 @@ void badOptimize(){
             currentDist = edgeLength(currentPositionArray());
         }
         
-        courseTiles[i].x-=1;
+        courseTiles[i].x-=2;
         previousDist = currentDist;
         currentDist = edgeLength(currentPositionArray());
         while (currentDist<previousDist) {
@@ -75,7 +81,7 @@ void badOptimize(){
             currentDist = edgeLength(currentPositionArray());
         }
         
-        courseTiles[i].y-=1;
+        courseTiles[i].y-=2;
         previousDist = currentDist;
         currentDist = edgeLength(currentPositionArray());
         while (currentDist<previousDist) {
@@ -106,7 +112,11 @@ float edgeLength(float[][] positions){
         for (int j = 0; j < courseTiles[i].parentIDs.length; ++j) {
             if (courseTiles[i].parentIDs[j]>=0) {
                 int parentID = courseTiles[i].parentIDs[j];
-                distances[edgeCount++] = dist(positions[i][0],positions[i][1], positions[parentID][0],positions[parentID][0]);//+courseTiles[i].dnHeight
+                fill(255, 0, 0);
+                circle(positions[i][0],positions[i][1]+courseTiles[i].dnHeight,20);
+                fill(0, 0, 255);
+                circle(positions[parentID][0],positions[parentID][1],20);
+                distances[edgeCount++] = dist(positions[i][0],positions[i][1], positions[parentID][0],positions[parentID][1]+courseTiles[i].dnHeight);//
             }
         }
     }
@@ -114,7 +124,7 @@ float edgeLength(float[][] positions){
     for (int i = 1; i < edgeCount; ++i) {
         distances[0]+=distances[i];
     }
-    return distances[0]+0*overlap(positions);
+    return distances[0]+1000*overlap(positions);
 }
 
 float overlap(float[][] positions){
@@ -122,8 +132,8 @@ float overlap(float[][] positions){
     for (int i = 0; i < positions.length; ++i) {
         for (int j = 0; j < positions.length; ++j) {
             if (i!=j) {
-                float xOverlap = Math.max(0, positions[i][0]-positions[j][0]+100);//calculate the X overlap, 100=width and height of tile
-                float yOverlap = Math.max(0, positions[i][1]-positions[j][1]+100);
+                float xOverlap = Math.max(0, positions[i][0]-positions[j][0]+130);//calculate the X overlap, 100=width and height of tile, +30 for margins
+                float yOverlap = Math.max(0, positions[i][1]-positions[j][1]+130);
                 if (xOverlap<100 && yOverlap<100) {
                     totalOverlap += (xOverlap*yOverlap);
                 }
