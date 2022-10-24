@@ -42,6 +42,7 @@ void drawGraphWidget(float x,float y,float width,float height){
     text("Score: "+(double)edgeLength(currentPositionArray()), x+width-400, y+30);
 }
 
+//Moves all tiles to within the defined bounds
 void checkTileBounds(){
     for (int i = 0; i < courseTiles.length; ++i) {
         courseTiles[i].x=Math.max((int)graphX, courseTiles[i].x);
@@ -51,7 +52,7 @@ void checkTileBounds(){
     }
 }
 
-
+//Obsolete
 void generateGraph(){
     //Rules: minimizeEdgeLength, No overlap
     
@@ -63,7 +64,29 @@ void generateGraph(){
     }
     // println(edgeLength(positions));
 }
+/////////////////////////
+//////OrderParents///////
+/////////////////////////
 
+//Take some node, and move parents to above & children to below
+void localView(DataNode node){
+    //position parents
+    DataNode temp;
+    for (int i = 0; i < node.parentIDs.length; ++i) {
+        temp=courseTiles[node.parentIDs[i]]; //parent;
+        temp.x = node.x + i*200;
+        temp.y = node.y-175;
+    }
+    
+    //find children
+}
+
+
+
+
+/////////////////////////
+//////OptimizeAlgo///////
+/////////////////////////
 void badOptimize(){
     for (int i = 0; i < courseTiles.length; ++i) {
         courseTiles[i].y = floor(courseTiles[i].y);

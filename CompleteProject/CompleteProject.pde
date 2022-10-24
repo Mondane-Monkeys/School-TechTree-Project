@@ -12,6 +12,7 @@ void setup() {
     size(2500, 1400);
     strokeWeight(1);
     initcourseTiles();
+    setupExpressionEditor();
 }
 
 void draw() {
@@ -20,6 +21,10 @@ void draw() {
     drawSearchWidget(0,200,300,1200);
     
     generateGraph();
+    
+    for (TextField tf : textFields) {
+            tf.draw();
+        }
 }
 
 // Initializer
@@ -135,6 +140,10 @@ void keyPressed() {
         }
     } else if (key == 'm') {
         badOptimize();
+    }
+    
+    if (textFieldFocus!= null) {
+        println(textFieldFocus.handleInput(key));
     }
 }
 

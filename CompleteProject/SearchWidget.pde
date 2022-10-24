@@ -94,16 +94,6 @@ class TextField{
             float lineX = Math.min(x + 4 + textWidth(str), x + w);
             line(lineX, y + 2 , lineX, y + h - 2);
         }
-        
-        for (TextField tf : textFields) {
-            tf.draw();
-        }
-    }
-}
-
-public void keyPressed() {
-    if (textFieldFocus!= null) {
-        println(textFieldFocus.handleInput(key));
     }
 }
 
