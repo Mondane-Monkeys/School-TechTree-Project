@@ -24,7 +24,9 @@ public void drawSearchWidget(float x, float y, float width, float height) {
     } //TODO -> implement Scrollbar
 }
 
-
+/*
+Add all results containing the users search filter to the arraylist
+*/
 private ArrayList<DataNode> searchResults(String filter) {
     ArrayList<DataNode> returnList = new ArrayList<DataNode>();
     
