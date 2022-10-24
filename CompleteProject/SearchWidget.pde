@@ -82,7 +82,7 @@ class TextField{
     public void draw() {
         fill(200); 
         rect(x, y, w, h);
-        fill(0);
+        fill(200,0,0);
         textSize(h * 0.8);
         text(str, x + 3, y, w, h);
         

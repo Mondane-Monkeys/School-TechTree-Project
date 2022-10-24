@@ -104,7 +104,7 @@ class DataNode {
     }
   }
   
-  void drawNode(float x,float y,float w,float h) { //ignores Node.x,y,w,h, and does not draw parentLines
+  public void drawNode(float x,float y,float w,float h) { //ignores Node.x,y,w,h, and does not draw parentLines
     //rect
     placeText(""+ID, (int)x, (int)y, 0.2*w, 0.2*h);//ID
     placeText(tag, (int)x+0.22*w, (int)y, 0.78*w, 0.20*h);//Tag
