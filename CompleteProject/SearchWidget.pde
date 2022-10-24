@@ -16,29 +16,27 @@ public void drawSearchWidget(float x, float y, float width, float height) {
     //if (filter!= null) {
     //    subCourseTiles = searchResults;
 //}
+    ArrayList filteredResults = searchResults(textFieldFocus.str);
     
-    //Example
-    fill(80,160,200);
-    rect(x, y, width, height);
+    
     
     int cols = 3;
     
     float tileWidth = width / cols; //calculate tile size
     float tileHeight = tileWidth;
     
-    for (int i = courseTiles.length - 1; i >= 0; --i) { //Draw from bottom to top -> avoid description-Tile overlap
-        if (courseTiles[i]!= null) {
-            float posX = x + ((i % cols) * tileWidth); //Calculate tile position
-            float posY = y + (i / cols) * tileHeight; 
-            courseTiles[i].drawNode(posX, posY, tileWidth, tileHeight);
-        }
+    for (int i = filteredResults.size() - 1; i >= 0; --i) { //Draw from bottom to top -> avoid description-Tile overlap
+        float posX = x + ((i % cols) * tileWidth); //Calculate tile position
+        float posY = y + (i / cols) * tileHeight; 
+        DataNode temp = (DataNode)(filteredResults.get(i));
+        temp.drawNode(posX, posY, tileWidth, tileHeight);
     } //TODO -> implement Scrollbar
 }
 
 /*
 Add all results containing the users search filter to the arraylist
 */
-private ArrayList<DataNode> searchResults(String filter) {
+ArrayList<DataNode> searchResults(String filter) {
     ArrayList<DataNode> returnList = new ArrayList<DataNode>();
     
     //filtered list
