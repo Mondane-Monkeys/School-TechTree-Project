@@ -186,6 +186,9 @@ public class Course {
         return true;
     }// .............................End isUpperCase
 
+    /*
+     * Removing the punctuation characters from the attributes
+     */
     public void trimAttributes(String[] prop, int propLength) {
         for (int i = 0; i < propLength; i++) {
             if (prop[i].contains(",")) {
