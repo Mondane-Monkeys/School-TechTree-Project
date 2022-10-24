@@ -18,8 +18,6 @@ public void drawSearchWidget(float x, float y, float width, float height) {
 //}
     ArrayList filteredResults = searchResults(textFieldFocus.str);
     
-    
-    
     int cols = 3;
     
     float tileWidth = width / cols; //calculate tile size
@@ -72,7 +70,8 @@ class TextField{
         cursorBlink = 0;
         textSize(h * 0.8);
         if (c ==  DELETE || c == BACKSPACE) {
-            str = str.substring(0,str.length() - 1);
+            if (str.length() > 0)
+                str = str.substring(0,str.length() - 1);
         } else if (textWidth(str)<w - 10 && c>= ' ' && c<= '~') {
             str += c;
         }
@@ -80,7 +79,7 @@ class TextField{
     }
     
     public void draw() {
-        fill(200);
+        fill(200); 
         rect(x, y, w, h);
         fill(0);
         textSize(h * 0.8);
