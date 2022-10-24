@@ -39,7 +39,8 @@ ArrayList<DataNode> searchResults(String filter) {
     
     //filtered list
     for (DataNode course : courseTiles) {
-        if (course.tag.contains(filter) || course.name.contains(filter)) {
+        if (course.tag.toUpperCase().contains(filter.toUpperCase()) || 
+            course.name.toUpperCase().contains(filter.toUpperCase())) {
             returnList.add(course);
         }
     }
