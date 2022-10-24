@@ -74,6 +74,7 @@ void badOptimize(){
     float currentDist = edgeLength(currentPositionArray());
     float previousDist = currentDist;
     for (int i = 0; i < courseTiles.length; ++i) {
+        
         courseTiles[i].x+=1;
         currentDist = edgeLength(currentPositionArray());
         while (currentDist<previousDist) {
@@ -81,6 +82,8 @@ void badOptimize(){
             courseTiles[i].x+=1;
             currentDist = edgeLength(currentPositionArray());
         }
+        courseTiles[i].x-=1;
+        currentDist = edgeLength(currentPositionArray());
         
         courseTiles[i].y+=1;
         previousDist = currentDist;
@@ -90,8 +93,10 @@ void badOptimize(){
             courseTiles[i].y+=1;
             currentDist = edgeLength(currentPositionArray());
         }
+        courseTiles[i].y-=1;
+        currentDist = edgeLength(currentPositionArray());
         
-        courseTiles[i].x-=2;
+        courseTiles[i].x-=1;
         previousDist = currentDist;
         currentDist = edgeLength(currentPositionArray());
         while (currentDist<previousDist) {
@@ -99,8 +104,10 @@ void badOptimize(){
             courseTiles[i].x+=1;
             currentDist = edgeLength(currentPositionArray());
         }
+        courseTiles[i].x+=1;
+        currentDist = edgeLength(currentPositionArray());
         
-        courseTiles[i].y-=2;
+        courseTiles[i].y-=1;
         previousDist = currentDist;
         currentDist = edgeLength(currentPositionArray());
         while (currentDist<previousDist) {
@@ -108,8 +115,8 @@ void badOptimize(){
             courseTiles[i].y+=1;
             currentDist = edgeLength(currentPositionArray());
         }
-        courseTiles[i].x+=1;
         courseTiles[i].y+=1;
+        currentDist = edgeLength(currentPositionArray());
     }
     checkTileBounds();
 }
@@ -144,7 +151,7 @@ float edgeLength(float[][] positions){
     for (int i = 1; i < edgeCount; ++i) {
         distances[0]+=distances[i];
     }
-    return distances[0]+10000*overlap(positions);
+    return distances[0]+1000000*overlap(positions);
 }
 
 float overlap(float[][] positions){
