@@ -56,7 +56,7 @@ void initcourseTiles() {
     courseTiles = new DataNode[courses.size()];
     int i = 0;
     for (Course course : courses) {
-        courseTiles[i++] = (new DataNode(course, i));
+        courseTiles[i++] = (new DataNode(course, i-1));
     }
     for (i = 0; i < courseTiles.length; ++i) {
         courseTiles[i].getParents();
@@ -106,7 +106,7 @@ void updateActive() {
 }
 
 void keyPressed() {
-    if (key ==  'p') {
+    if (key ==  ',') {
         String exportString = "";
         for (int i = 0; i < courseTiles.length; i++) {
             exportString += courseTiles[i].x + ":" + courseTiles[i].y;
@@ -115,7 +115,7 @@ void keyPressed() {
         exportString += "|";
         println("CompleteProject.keyPressed : " + exportString);
     }
-    if (key ==  'o') {
+    if (key ==  '.') {
         String impString = JOptionPane.showInputDialog("importString");
         int x = 0;
         int y = 0;
@@ -138,10 +138,11 @@ void keyPressed() {
                 temp += impString.charAt(i);
             }
         }
-    } else if (key == 'm') {
+    } else if (key == '/') {
         badOptimize();
     }
     
+    //Update selected textbox.str
     if (textFieldFocus!= null) {
         println(textFieldFocus.handleInput(key));
     }

@@ -5,6 +5,7 @@ float graphHeight;
 
 //width must be greater than 150!
 void drawGraphWidget(float x,float y,float width,float height){
+    localView(courseTiles[11]);
     graphX = x;
     graphY = y;
     graphWidth = width;
@@ -71,14 +72,17 @@ void generateGraph(){
 //Take some node, and move parents to above & children to below
 void localView(DataNode node){
     //position parents
-    DataNode temp;
-    for (int i = 0; i < node.parentIDs.length; ++i) {
-        temp=courseTiles[node.parentIDs[i]]; //parent;
-        temp.x = node.x + i*200;
-        temp.y = node.y-175;
+    DataNode temp; //<>//
+    for (int i = 0; i < node.parentIDs.length; ++i) { //<>//
+        if (node.parentIDs[i]>=0) { //<>//
+            temp=courseTiles[node.parentIDs[i]]; //parent;
+            temp.x = node.x + i*200;
+            temp.y = node.y-175;
+        }
     }
     
     //find children
+    
 }
 
 
