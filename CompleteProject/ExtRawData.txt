@@ -1,0 +1,38 @@
+COMP 1010  Introductory Computer Science 1  3 cr  
+(Lab Required) An introduction to computer programming using a procedural high level language. May not be held with COMP 1011 or COMP 1012 or COMP 1013.
+
+PR/CR: A minimum grade of C is required unless otherwise indicated.
+Prerequisite: any grade 12 or 40S Mathematics, or equivalent.
+
+Equiv To: COMP 1011
+
+Mutually Exclusive: COMP 1012, COMP 1013
+
+Attributes: Science, Recommended Intro Courses
+
+COMP 1012  Computer Programming for Scientists and Engineers  3 cr  
+(Lab Required) An introduction to computer programming suitable for solving problems in science and engineering. Students will implement algorithms for numerical processing, statistical analysis and matrix operations. Not to be held with COMP 1010, COMP 1011 or COMP 1013.
+
+PR/CR: A minimum grade of C is required unless otherwise indicated.
+Prerequisite: Mathematics 40S or equivalent. Co-requisite: MATH 1230 or MATH 1500 or MATH 1501 (or equivalent).
+
+Equiv To: COMP 1013
+
+Mutually Exclusive: COMP 1010, COMP 1011
+
+Attributes: Science
+
+MATH 0500  Preparing for University Mathematics  0 cr  
+A voluntary non-credit mathematics course for students, holding credit in Pre-Calculus 40S or Applied Mathematics 40S or equivalent, who would benefit from improving their knowledge and skills concerning topics included in the Manitoba secondary school mathematics curriculum.(NOTE: The fee for this course is non-refundable upon withdrawal). This course may be taken prior to or concurrently with MATH 1200, 1210, 1300, 1310, 1500, 1510, 1520, 1700, 1710 or 1690. Students participating in this course should purchase the set of notes "Preparing for University Mathematics" from the University of Manitoba Bookstore.
+
+PR/CR: A minimum grade of C is required unless otherwise indicated.
+Prerequisite: a grade of 60% in Pre-Calculus 40S, 70% in Applied Mathematics 40S or a grade of 60% or better in the Math Skills course offered by Extended Education.
+
+Attributes: Science
+
+MATH 1010  Applied Finite Mathematics  3 cr  
+(Lab Required) For students needing to fill the requirement of a university level mathematics course. Introduces students to modern applications of discrete mathematics. Topics include: mathematics of finance, linear programming, graph theory, and game theory. This is a terminal course and may not be used as a prerequisite for other Mathematics courses. This course cannot be used as part of an Honours, Major, General or Minor program in the mathematical sciences. Not available to any student already holding a grade of “C” or better in any Mathematics course with the exception of MATH 1020, FA 1020, the former MATH 1190 or MATH 1191. Not to be taken concurrently with any other Mathematics course with the exception of MATH 1020, FA 1020 or MATH 1191. No prerequisite.
+
+Mutually Exclusive: MATH 1200, MATH 1201, MATH 1210, MATH 1211, MATH 1220, MATH 1230, MATH 1232, MATH 1240, MATH 1241, MATH 1300, MATH 1301, MATH 1310, MATH 1500, MATH 1501, MATH 1510, MATH 1520, MATH 1690, MATH 1700, MATH 1701, MATH 1710
+
+Attributes: Mathematics Requirement, Science, Recommended Intro Courses

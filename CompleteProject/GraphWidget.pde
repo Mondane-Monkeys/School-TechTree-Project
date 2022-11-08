@@ -82,7 +82,9 @@ void localView(DataNode node){
     }
     
     //find children
-    
+    for (int i = 0; i < courseTiles.length; ++i) {
+        
+    }
 }
 
 

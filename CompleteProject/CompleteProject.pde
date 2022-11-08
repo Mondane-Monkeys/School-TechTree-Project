@@ -20,7 +20,7 @@ void draw() {
     drawGraphWidget(350,0,2200,1400);
     drawSearchWidget(0,200,300,1200);
     
-    generateGraph();
+    // generateGraph();
     
     for (TextField tf : textFields) {
             tf.draw();
@@ -66,6 +66,7 @@ void initcourseTiles() {
 
 //mouseClick / released
 void mousePressed() {
+    //Used to remeber previous mouse positions (depricated)
     mousePos[0] = mouseX;
     mousePos[1] = mouseY;
     mousePos[2] = mouseX;
@@ -73,7 +74,7 @@ void mousePressed() {
     mousePos[4] = mouseX;
     mousePos[5] = mouseY;
     
-    println(mousePos[0]);
+    //drag one tile around
     if (mouseButton ==  LEFT) {
         for (int i = 0; i < courseTiles.length; i++) {
             float x = courseTiles[i].x;
@@ -84,6 +85,7 @@ void mousePressed() {
             }
         }
     }
+    
     if (mouseButton ==  RIGHT) {
         highlighting = true;
     }
