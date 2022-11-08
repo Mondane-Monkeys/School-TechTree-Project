@@ -3,3 +3,7 @@ GraphWidget:
 
 SearchWidget
     Add searchBar? -> see textBox.pde
+
+Initialization
+    Accept mixed course prefixes (ie, COMP and MATH courses) -> should not be hardcoded
+    If preReq is not in provided list, create new DataNode for that prereq
