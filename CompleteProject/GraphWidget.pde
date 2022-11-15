@@ -5,7 +5,8 @@ float graphHeight;
 
 //width must be greater than 150!
 void drawGraphWidget(float x,float y,float width,float height){
-    localView(courseTiles[11]);
+    // buildTree(courseTiles[courseTiles.length-1]);
+    topDownOrder();
     graphX = x;
     graphY = y;
     graphWidth = width;
@@ -65,33 +66,9 @@ void generateGraph(){
     }
     // println(edgeLength(positions));
 }
-/////////////////////////
-//////OrderParents///////
-/////////////////////////
-
-//Take some node, and move parents to above & children to below
-void localView(DataNode node){
-    //position parents
-    DataNode temp; //<>//
-    for (int i = 0; i < node.parentIDs.length; ++i) { //<>//
-        if (node.parentIDs[i]>=0) { //<>//
-            temp=courseTiles[node.parentIDs[i]]; //parent;
-            temp.x = node.x + i*200;
-            temp.y = node.y-175;
-        }
-    }
-    
-    //find children
-    for (int i = 0; i < courseTiles.length; ++i) {
-        
-    }
-}
-
-
-
 
 /////////////////////////
-//////OptimizeAlgo///////
+////OptimizeAlgorithm////
 /////////////////////////
 void badOptimize(){
     for (int i = 0; i < courseTiles.length; ++i) {
@@ -198,3 +175,117 @@ float overlap(float[][] positions){
     }
     return totalOverlap;
 }
+
+
+/////////////////////////
+///ProceederalAlgorithm//
+/////////////////////////
+
+//Build Tree
+void buildTree(DataNode node){
+    for (int i = 0; i < courseTiles.length; ++i) {
+        buildTree2(courseTiles[i]);
+    }
+}
+
+//Start with given Node and draw all parents above and children below.
+void buildTree2(DataNode node){
+    ArrayList<DataNode> parents = node.GetParentNodes();
+    int i = 0;
+    for (DataNode parentNode : parents) {
+        parentNode.x = node.x + i*200;
+        parentNode.y = node.y-175;
+        i++;
+        buildTree2(parentNode);
+    }
+}
+
+//Start with given Node and draw all parents above and children below.
+void buildTree1(DataNode node){
+    localView(node);
+    DataNode temp; //<>//
+    for (int i = 0; i < node.parentIDs.length; ++i) { //<>//
+        if (node.parentIDs[i]>=0) { //<>//
+            temp=courseTiles[node.parentIDs[i]]; //parent;
+            buildTree(temp);
+        }
+    }
+}
+
+void topDownOrder(){
+    //get node with most decendants.
+    int maxDescendants =0;
+    DataNode mostDescendants = courseTiles[0];
+    
+    for (int i = 0; i < courseTiles.length; ++i) {
+        int descendantCount = getDescendantCount(courseTiles[i]);
+        if (descendantCount>maxDescendants) {
+            mostDescendants = courseTiles[i];
+            maxDescendants = descendantCount;
+        }
+    }
+    
+    //place node at top. place children below. 
+    ArrayList<DataNode> placedNodes = new ArrayList<DataNode>();
+    placeChildrenTopDown(mostDescendants, placedNodes);
+    
+    //repeat with all non-placedNodes
+    for (int i = 0; i < courseTiles.length; ++i) {
+        DataNode temp = courseTiles[i];
+        if (!placedNodes.contains(temp)) {
+            placeChildrenTopDown(temp, placedNodes);
+        }
+    }
+}
+
+int placeChildrenTopDown(DataNode parent, ArrayList<DataNode> placed){
+    ArrayList<DataNode> children = parent.GetChildNodes();
+    int x = parent.x;
+    for (int i = 0; i < children.size(); ++i) {
+        DataNode temp = children.get(i);
+        
+        if (!placed.contains(temp)) {
+            if (parent.ID == 7) {
+                println(temp.ID + ": " +x);
+            }
+            placed.add(temp);
+            temp.x = x;
+            temp.y = parent.y + 200;
+            x = placeChildrenTopDown(temp, placed);
+            x+=100;
+        }
+    }
+    
+    return x;
+}
+
+int getDescendantCount(DataNode node){
+    ArrayList<DataNode> children = node.GetChildNodes();
+    int count = children.size();
+    for (DataNode child : children) {
+        count+=getDescendantCount(child);
+    }
+    return count;
+}
+/////////////////////////
+//////OrderParents///////
+/////////////////////////
+
+//Take some node, and move parents to above & children to below
+void localView(DataNode node){
+    //position parents
+    DataNode temp; //<>//
+    for (int i = 0; i < node.parentIDs.length; ++i) { //<>//
+        if (node.parentIDs[i]>=0) { //<>//
+            temp=courseTiles[node.parentIDs[i]]; //parent;
+            temp.x = node.x + i*200;
+            temp.y = node.y-175;
+        }
+    }
+    
+    //find children
+    for (int i = 0; i < courseTiles.length; ++i) {
+        
+    }
+}
+

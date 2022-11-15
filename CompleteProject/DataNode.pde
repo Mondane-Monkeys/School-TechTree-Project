@@ -32,8 +32,8 @@ class DataNode {
     this.name=course.name;
     this.preReqs= (course.preReqs==null)? new String[0] : course.preReqs; 
     this.coReqs = (course.coReqs==null)? new String[0] : course.coReqs;//TODO add coReqs
-    this.x = 0;
-    this.y = 0;
+    this.x = width/2 + (int)random(-300, 300);
+    this.y = height/2 + (int)random(-300, 300);
     this.dnWidth = 100;
     this.dnHeight = 100;
     trimPreReqs();
@@ -79,6 +79,30 @@ class DataNode {
       }
     }
     return returnVal;
+  }
+  
+  ArrayList<DataNode> GetParentNodes(){
+    ArrayList<DataNode> parents = new ArrayList<DataNode>();
+    for (int i = 0; i < parentIDs.length; ++i) { //<>//
+        if (parentIDs[i]>=0 && courseTiles[parentIDs[i]] != null) { //<>//
+            parents.add(courseTiles[parentIDs[i]]); //parent;
+        }
+    }
+    
+    return parents;
+  }
+  
+  ArrayList<DataNode> GetChildNodes(){
+    ArrayList<DataNode> children = new ArrayList<DataNode>();
+    DataNode temp;
+    for (int i = 0; i < courseTiles.length; ++i) {
+      temp = courseTiles[i];
+      if (temp.isParent(this)) {
+        children.add(temp);
+      }
+    }
+    
+    return children;
   }
 
   //draw

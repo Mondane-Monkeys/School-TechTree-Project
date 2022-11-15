@@ -110,7 +110,7 @@ Attributes: Science
 
 COMP 2980  Workterm 1  0 cr  
 Work assignment in business, industry, or government for students registered in the Computer Science Cooperative Option. Requires submission of a written report covering the work completed during the four-month professional assignment. (Pass/Fail)
-
+Prerequisites: COMP 1500
 Attributes: Science
 
 COMP 3010  Distributed Computing  3 cr  
